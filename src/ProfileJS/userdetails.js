@@ -5,7 +5,7 @@ export default function UserDetails() {
   const [userData, setUserData] = useState("");
 
   useEffect(() => {
-    fetch("https://interntask-profile.onrender.com/userData", {
+    fetch(`https://interntask-profile.onrender.com/userData`, {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -25,7 +25,7 @@ export default function UserDetails() {
         if (data.data === "token expired") {
           alert("Token expired login again");
           window.localStorage.clear();
-          window.location.href = "./sign-in";
+          window.location.href = "https://interntaskprofile.netlify.app/sign-in";
         }
       });
   }, []);

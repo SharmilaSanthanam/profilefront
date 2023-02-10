@@ -11,7 +11,7 @@ export default function UserHome({ userData }) {
   };
 
   const getUser = () => {
-    fetch("https://interntask-profile.onrender.com/userdata/:id", {
+    fetch(`https://interntask-profile.onrender.com/userdata/:id`, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -23,7 +23,7 @@ export default function UserHome({ userData }) {
 
   const updateUser = (id, name) => {
     if (window.confirm(`Are you sure you want to update ${name}`)) {
-      fetch("https://interntask-profile.onrender.com/updateUser/:id", {
+      fetch(`https://interntask-profile.onrender.com/updateUser/:id`, {
         method: "PUT",
         crossDomain: true,
         headers: {
