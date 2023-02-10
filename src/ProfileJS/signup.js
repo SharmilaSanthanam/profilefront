@@ -16,7 +16,7 @@ export default function SignUp() {
       e.preventDefault();
 
       console.log(name, email, password, cpassword);
-      fetch("http://localhost:5000/register", {
+      fetch("https://interntask-profile.onrender.com/register", {
         method: "POST",
         crossDomain: true,
         headers: {

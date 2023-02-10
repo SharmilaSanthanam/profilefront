@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-// import UserUpdate from "./userupdate";
-
 import UserHome from "./userhome";
 
 export default function UserDetails() {
   const [userData, setUserData] = useState("");
-  // const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:5000/userData", {
+    fetch("https://interntask-profile.onrender.com/userData", {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -23,10 +20,6 @@ export default function UserDetails() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "userData");
-        // if (data.data.userType == "Admin") {
-        //   setAdmin(true);
-        // }
-
         setUserData(data.data);
 
         if (data.data === "token expired") {
@@ -37,6 +30,5 @@ export default function UserDetails() {
       });
   }, []);
 
-  return  <UserHome userData={userData} />;
-  // return admin ? <AdminHome /> : <UserHome userData={userData} />;
+  return <UserHome userData={userData} />;
 }
