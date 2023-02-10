@@ -12,7 +12,7 @@ export default function Login() {
     e.preventDefault();
 
     console.log(email, password);
-    fetch(`https://interntask-profile.onrender.com/login-user/`, {
+    fetch(`https://interntask-profile.onrender.com/login-user`, {
       method: "POST",
       crossDomain: true,
       headers: {
