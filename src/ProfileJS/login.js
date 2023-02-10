@@ -35,6 +35,8 @@ export default function Login() {
           window.localStorage.setItem("loggedIn", true);
 
           window.location.href = "https://interntaskprofile.netlify.app/userDetails";
+        } else {
+          alert("Please enter correct details", `${data}`);
         }
       });
     }
