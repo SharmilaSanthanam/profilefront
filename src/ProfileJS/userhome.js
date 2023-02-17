@@ -1,17 +1,35 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "../axios";
 
 export default function UserHome({ userData }) {
   const [data, setData] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  const logOut = () => {
-    window.localStorage.clear();
-    window.location.href = "./sign-in";
-  };
+  const navigate = useNavigate();
+
+  // const logOut = () => {
+  //   window.localStorage.clear();
+  //   window.location.href = "/sign-in";
+  // };
+
+    const logOut = (event) => {
+    // axios.get(`http://localhost:5000/api/logout`)
+    //   .then(result => {
+        window.sessionStorage.clear();
+        window.localStorage.clear();
+        window.location.href = "/";
+        // navigate("/");
+       
+      // })
+    }
+
+    window.addEventListener("storage", logOut);
 
   const getUser = () => {
-    fetch(`https://interntask-profile.onrender.com/userdata/:id`, {
+    // fetch(`https://interntask-profile.onrender.com/userdata/:id`, {
+      fetch(`http://localhost:5000/userdata/:id`, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -23,7 +41,8 @@ export default function UserHome({ userData }) {
 
   const updateUser = (id, name) => {
     if (window.confirm(`Are you sure you want to update ${name}`)) {
-      fetch(`https://interntask-profile.onrender.com/updateUser/:id`, {
+      fetch(`http://localhost:5000/updateUser/:id`, {
+        // fetch(`https://interntask-profile.onrender.com/updateUser/:id`, {
         method: "PUT",
         crossDomain: true,
         headers: {
@@ -52,40 +71,18 @@ export default function UserHome({ userData }) {
           Name<h1>{userData.name}</h1>
           Email <h1>{userData.email}</h1>
           <br />
-
+          <div className="d-grid">
           <button onClick={logOut} className="btn btn-primary">
             Log Out
-          </button><br />
-
-          <form ><br />
-            <h3>Update Profile Details</h3>
-
-            <div className="mb-3">
-              <label>Name</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder={userData.name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-
-            <div className="mb-3">
-              <label>Email address</label>
-              <input
-                type="email"
-                className="form-control"
-                placeholder={userData.email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-
-            <div className="d-grid">
-              <button type="submit" className="btn btn-primary" onClick={() => updateUser(userData.name, userData.email)}>
-                Update
-              </button>
-            </div>
-          </form>
+          </button>
+          </div>
+          <br />
+     
+          <div className="d-grid">
+  <button type="submit" className="btn btn-primary" onClick={() => navigate("/user-update/"+`${userData._id}`)}>
+               Update
+           </button>
+           </div>
 
         </div>
       </div>

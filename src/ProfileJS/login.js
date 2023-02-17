@@ -12,7 +12,8 @@ export default function Login() {
     e.preventDefault();
 
     console.log(email, password);
-    fetch(`https://interntask-profile.onrender.com/login-user`, {
+    // fetch(`https://interntask-profile.onrender.com/login-user`, {
+      fetch(`http://localhost:5000/login-user`, {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -33,8 +34,10 @@ export default function Login() {
           alert("login successful");
           window.localStorage.setItem("token", data.data);
           window.localStorage.setItem("loggedIn", true);
+          window.sessionStorage.setItem("token", data.data);
+          window.sessionStorage.setItem("loggedIn", true);
 
-          window.location.href = "https://interntaskprofile.netlify.app/userDetails";
+          window.location.href = "/userDetails";
         } else {
           alert("Please enter correct details", `${data}`);
         }
@@ -74,7 +77,7 @@ export default function Login() {
             </button>
           </div>
           <p className="forgot-password text-right">
-            <a href="https://interntaskprofile.netlify.app/sign-up">Sign Up</a>
+            <a href="/sign-up">Sign Up</a>
           </p>
         </form>
       </div>

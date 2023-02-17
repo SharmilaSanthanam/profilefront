@@ -16,7 +16,8 @@ export default function SignUp() {
       e.preventDefault();
 
       console.log(name, email, password, cpassword);
-      fetch(`https://interntask-profile.onrender.com/register`, {
+      // fetch(`https://interntask-profile.onrender.com/register`, {
+        fetch(`http://localhost:5000/register`, {
         method: "POST",
         crossDomain: true,
         headers: {
@@ -36,7 +37,7 @@ export default function SignUp() {
           console.log(data, "userRegister");
           if (data.status === "ok") {
             alert("Registration Successful");
-            window.location.href = "https://interntaskprofile.netlify.app/sign-in";
+            window.location.href = "/";
           } else {
             alert("Something went wrong");
           }
@@ -96,7 +97,7 @@ export default function SignUp() {
             </button>
           </div>
           <p className="forgot-password text-right">
-            Already registered <a href="https://interntaskprofile.netlify.app/sign-in">sign in?</a>
+            Already registered <a href="/">sign in?</a>
           </p>
         </form>
       </div>
