@@ -9,8 +9,7 @@ function UserUpdate() {
 
   const editprofile = async () => {
     try {
-//       const { data } = await axios.get(`http://localhost:5000/${id}`,
-            const { data } = await axios.get(`https://interntask-profile.onrender.com/${id}`,
+      const { data } = await axios.get(`http://localhost:5000/${id}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -30,18 +29,18 @@ function UserUpdate() {
   return (
     <div className="auth-wrapper">
       <div className="auth-inner">
-      {profile ? (<EditUpdateForm profile={profile} />
-      ) : (
-        <div className="progress mt-3">
-          <h1>Loading...</h1>
-        </div>
-      )}
-    </div>
+        {profile ? (<EditUpdateForm profile={profile} />
+        ) : (
+          <div className="progress mt-3">
+            <h1>Loading...</h1>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
 
-export function EditUpdateForm({profile}) {
+export function EditUpdateForm({ profile }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const accessToken = window.localStorage.getItem("accessToken");
@@ -49,28 +48,13 @@ export function EditUpdateForm({profile}) {
   const [name, setName] = useState(profile.name);
   const [email, setEmail] = useState(profile.email);
 
-  // const logOut = () => {
-  //   window.localStorage.clear();
-  //   window.location.href = "/";
-  // };
-
   const logOut = (event) => {
-    // axios.get(`http://localhost:5000/api/logout`)
-    //   .then(result => {
-        window.sessionStorage.clear();
-        window.localStorage.clear();
-        window.location.href = "/";
-        // navigate("/");
-       
-      // })
-    }
+    window.sessionStorage.clear();
+    window.localStorage.clear();
+    window.location.href = "/";
+  }
 
-    window.addEventListener("storage", logOut);
-
-  const userHome = () => {
-    // window.localStorage.clear();
-    window.location.href = "/userDetails";
-  };
+  window.addEventListener("storage", logOut);
 
   //edit userupdate form and api call
 
@@ -79,7 +63,7 @@ export function EditUpdateForm({profile}) {
       name: name,
       email: email,
     };
-    await axios.put(`https://interntask-profile.onrender.com/${id}`, updateProfile,
+    await axios.put(`http://localhost:5000/${id}`, updateProfile,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -91,56 +75,47 @@ export function EditUpdateForm({profile}) {
 
 
   return (
-    // <div className="auth-wrapper">
-    //   <div className="auth-inner">
-        <div>
-        <form>
-          <h3>Update Profile</h3>
+    <div>
+      <form>
+        <h3>Update Profile</h3>
 
-          <div className="mb-3">
-            <label>Name</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Name"
-              onChange={(event) => setName(event.target.value)}
-            />
-          </div>
+        <div className="mb-3">
+          <label>Name</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Name"
+            onChange={(event) => setName(event.target.value)}
+          />
+        </div>
 
-          <div className="mb-3">
-            <label>Email address</label>
-            <input
-              type="email"
-              className="form-control"
-              placeholder="Enter email"
-              onChange={(event) => setEmail(event.target.value)}
-            />
-          </div>
+        <div className="mb-3">
+          <label>Email address</label>
+          <input
+            type="email"
+            className="form-control"
+            placeholder="Enter email"
+            onChange={(event) => setEmail(event.target.value)}
+          />
+        </div>
 
-          <div className="d-grid">
-            <button type="submit" className="btn btn-primary" onClick={editprofile}>
-              Update
-            </button>
-            <br></br>
-            
-          </div>
-          
-        </form>
         <div className="d-grid">
-          <button onClick={logOut} className="btn btn-primary">
-            Logout
-          </button>&nbsp; &nbsp;
-          </div>
-          {/* <button onClick={logOut} className="btn btn-primary">
-            Log Out
-          </button>&nbsp; &nbsp; */}
-          {/* <button onClick={userHome} className="btn btn-primary">
-            Profile
-          </button>&nbsp; &nbsp; */}
+          <button type="submit" className="btn btn-primary" onClick={editprofile}>
+            Update
+          </button>
+          <br></br>
+        </div>
+      </form>
+
+      <div className="d-grid">
+        <h1>Updated Profile</h1>
+        Name<h1>{profile.data.name}</h1>
+        Email <h1>{profile.data.email}</h1>
+        <button onClick={logOut} className="btn btn-primary">
+          Log Out
+        </button>&nbsp; &nbsp;
       </div>
-    //   </div>
-    // </div>
+    </div>
   );
 }
-
 export default UserUpdate;
