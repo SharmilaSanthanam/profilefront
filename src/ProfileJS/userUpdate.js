@@ -9,7 +9,8 @@ function UserUpdate() {
 
   const editprofile = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/${id}`,
+//       const { data } = await axios.get(`http://localhost:5000/${id}`,
+       const { data } = await axios.get(`https://interntask-profile.onrender.com/${id}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -63,7 +64,8 @@ export function EditUpdateForm({ profile }) {
       name: name,
       email: email,
     };
-    await axios.put(`http://localhost:5000/${id}`, updateProfile,
+//     await axios.put(`http://localhost:5000/${id}`, updateProfile,
+      await axios.put(`https://interntask-profile.onrender.com/${id}`, updateProfile,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
