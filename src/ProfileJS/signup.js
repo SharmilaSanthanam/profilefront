@@ -5,8 +5,6 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
-  // const [userType, setUserType] = useState("");
-  // const [secretKey, setSecretKey] = useState("");
 
   const handleSubmit = (e) => {
     if (!name || !email || !password || !cpassword) {
@@ -16,8 +14,8 @@ export default function SignUp() {
       e.preventDefault();
 
       console.log(name, email, password, cpassword);
-      fetch(`https://interntask-profile.onrender.com/register`, {
-//         fetch(`http://localhost:5000/register`, {
+      // fetch(`https://interntask-profile.onrender.com/register`, {
+      fetch(`http://localhost:5000/register`, {
         method: "POST",
         crossDomain: true,
         headers: {
@@ -50,7 +48,7 @@ export default function SignUp() {
       <div className="auth-inner">
         <form onSubmit={handleSubmit}>
           <h3>Sign Up</h3>
-        
+
           <div className="mb-3">
             <label>Name</label>
             <input
@@ -61,7 +59,7 @@ export default function SignUp() {
             />
           </div>
 
-                 <div className="mb-3">
+          <div className="mb-3">
             <label>Email address</label>
             <input
               type="email"
