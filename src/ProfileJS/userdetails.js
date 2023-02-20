@@ -5,8 +5,8 @@ export default function UserDetails() {
   const [userData, setUserData] = useState("");
 
   useEffect(() => {
-    // fetch(`https://interntask-profile.onrender.com/userData`, {
-    fetch(`http://localhost:5000/userData`, {
+    fetch(`https://interntask-profile.onrender.com/userData`, {
+//     fetch(`http://localhost:5000/userData`, {
       method: "POST",
       crossDomain: true,
       headers: {
